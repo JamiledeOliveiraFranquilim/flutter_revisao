@@ -150,13 +150,11 @@ class _PersonagemListaState extends State<PersonagemLista> {
         foregroundColor: Colors.white,
         elevation: 4,
         actions: [
-          // Botão de recarregar
           IconButton(
             icon: Icon(Icons.refresh),
             onPressed: _loadCharacters,
             tooltip: 'Recarregar',
           ),
-          // Contador de personagens
           if (!_isLoading)
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12),
@@ -179,9 +177,7 @@ class _PersonagemListaState extends State<PersonagemLista> {
       ),
       body: Column(
         children: [
-          // Barra de pesquisa
           _buildSearchBar(),
-          // Conteúdo principal
           Expanded(child: _buildContent()),
         ],
       ),
@@ -200,8 +196,6 @@ class _PersonagemListaState extends State<PersonagemLista> {
       ),
     );
   }
-
-  // Barra de pesquisa personalizada
   Widget _buildSearchBar() {
     return Container(
       padding: EdgeInsets.all(16),
@@ -242,8 +236,6 @@ class _PersonagemListaState extends State<PersonagemLista> {
       ),
     );
   }
-
-  // Conteúdo principal da lista
   Widget _buildContent() {
     if (_isLoading) {
       return _buildLoadingState();
@@ -255,8 +247,6 @@ class _PersonagemListaState extends State<PersonagemLista> {
 
     return _buildCharacterList();
   }
-
-  // Estado de carregamento
   Widget _buildLoadingState() {
     return Center(
       child: Column(
@@ -277,8 +267,6 @@ class _PersonagemListaState extends State<PersonagemLista> {
       ),
     );
   }
-
-  // Estado vazio
   Widget _buildEmptyState() {
     return Center(
       child: Column(
@@ -324,7 +312,6 @@ class _PersonagemListaState extends State<PersonagemLista> {
     );
   }
 
-  // Lista de personagens
   Widget _buildCharacterList() {
     return RefreshIndicator(
       onRefresh: _loadCharacters,
@@ -345,7 +332,7 @@ class _PersonagemListaState extends State<PersonagemLista> {
               );
             },
             onDelete: () => _deleteCharacter(character),
-            onEdit: () => _editarPersonagem(character), // <-- ADICIONE ESTA LINHA
+            onEdit: () => _editarPersonagem(character),
           );
         },
       ),
