@@ -65,7 +65,7 @@ class HomeScreen extends StatelessWidget {
                   Colors.green,
                   () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CharacterListScreen()),
+                    MaterialPageRoute(builder: (context) => PersonagemLista()),
                   ),
                 ),
                 SizedBox(height: 16),
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                   Colors.blue,
                   () => Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => AddCharacterScreen()),
+                    MaterialPageRoute(builder: (context) => CadastroPersonagemPage()),
                   ),
                 ),
                 SizedBox(height: 16),
