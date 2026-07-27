@@ -60,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: 40),
                 _buildOptionCard(
                   context,
-                  '📋 Listar Personagens',
+                  'Listar Personagens',
                   'Veja todos os personagens encontrados',
                   Colors.green,
                   () => Navigator.push(
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: 16),
                 _buildOptionCard(
                   context,
-                  '➕ Novo Cadastro',
+                  'Novo Cadastro',
                   'Registre um novo personagem encontrado',
                   Colors.blue,
                   () => Navigator.push(
@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                 SizedBox(height: 16),
                 _buildOptionCard(
                   context,
-                  '📊 Estatísticas',
+                  'Estatísticas',
                   'Veja análise dos personagens encontrados',
                   Colors.purple,
                   () => Navigator.push(
