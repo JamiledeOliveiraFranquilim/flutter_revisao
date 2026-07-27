@@ -5,6 +5,7 @@ import '../services/supabase_service.dart';
 import '../widgets/personagem_card.dart';
 import 'pesquisa_personagem.dart';
 import 'detalhes_personagens.dart';
+import 'cadastro_personagem.dart';
 
 class PersonagemLista extends StatefulWidget {
   @override
@@ -60,6 +61,18 @@ class _PersonagemListaState extends State<PersonagemLista> {
     } catch (e) {
       _showSnackBar('Erro ao pesquisar: $e', Colors.red);
     }
+  }
+
+  // Método para editar personagem
+  void _editarPersonagem(Character character) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CadastroPersonagemPage(
+          character: character, // Passa o personagem para edição
+        ),
+      ),
+    ).then((_) => _loadCharacters()); // Recarrega após editar
   }
 
   // Excluir personagem
@@ -176,7 +189,9 @@ class _PersonagemListaState extends State<PersonagemLista> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CadastroPersonagemPage()),
+            MaterialPageRoute(
+              builder: (context) => const CadastroPersonagemPage(), // Cadastro novo
+            ),
           ).then((_) => _loadCharacters());
         },
         child: Icon(Icons.add),
@@ -296,7 +311,9 @@ class _PersonagemListaState extends State<PersonagemLista> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CadastroPersonagemPage()),
+                  MaterialPageRoute(
+                    builder: (context) => const CadastroPersonagemPage(),
+                  ),
                 ).then((_) => _loadCharacters());
               },
               icon: Icon(Icons.add),
@@ -317,7 +334,7 @@ class _PersonagemListaState extends State<PersonagemLista> {
         itemCount: _filteredCharacters.length,
         itemBuilder: (context, index) {
           final character = _filteredCharacters[index];
-          return CharacterCard(
+          return PersonagemCard(
             character: character,
             onTap: () {
               Navigator.push(
@@ -328,14 +345,7 @@ class _PersonagemListaState extends State<PersonagemLista> {
               );
             },
             onDelete: () => _deleteCharacter(character),
-            onEdit: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => EditCharacterScreen(character: character),
-                ),
-              ).then((_) => _loadCharacters());
-            },
+            onEdit: () => _editarPersonagem(character), // <-- ADICIONE ESTA LINHA
           );
         },
       ),

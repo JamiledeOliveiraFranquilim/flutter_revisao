@@ -1,16 +1,15 @@
 //Jamile de Oliveira Franquilim e Geovanna Kaori Shimada
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../models/personagens.dart';
 
-class CharacterCard extends StatelessWidget {
+class PersonagemCard extends StatelessWidget {
   final Character character;
   final VoidCallback onTap;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
 
-  const CharacterCard({
+  const PersonagemCard({
     Key? key,
     required this.character,
     required this.onTap,
@@ -96,7 +95,7 @@ class CharacterCard extends StatelessWidget {
                         Icon(Icons.calendar_today, size: 14, color: Colors.grey.shade600),
                         SizedBox(width: 4),
                         Text(
-                          DateFormat('dd/MM/yyyy').format(character.dataRegistro),
+                          character.dataRegistro.toString().split(' ')[0],
                           style: TextStyle(
                             color: Colors.grey.shade600,
                             fontSize: 12,
