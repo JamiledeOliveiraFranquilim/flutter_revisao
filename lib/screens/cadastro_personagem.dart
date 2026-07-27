@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/personagens.dart';
 
 class CadastroPersonagemPage extends StatefulWidget {
-  final Character? character; // Se for null, é cadastro novo
+  final Character? character;
 
   const CadastroPersonagemPage({super.key, this.character});
 
@@ -40,14 +40,12 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
   @override
   void initState() {
     super.initState();
-    // Verifica se é edição
     if (widget.character != null) {
       isEditing = true;
       _preencherCampos();
     }
   }
 
-  // Método para preencher os campos com os dados do personagem
   void _preencherCampos() {
     final c = widget.character!;
     nomeController.text = c.nome;
@@ -57,7 +55,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
     observacoesController.text = c.observacoes ?? '';
   }
 
-  // Método para cadastrar ou atualizar
   Future<void> _salvar() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -73,7 +70,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
       };
 
       if (isEditing) {
-        // Atualizar personagem existente
         await supabase
             .from('personagens')
             .update(dados);
@@ -97,12 +93,8 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
             backgroundColor: Colors.green,
           ),
         );
-
-        // Limpar campos após cadastro
         _limparCampos();
       }
-
-      // Retornar para a tela anterior com sucesso
       Navigator.pop(context, true);
     } catch (e) {
       if (!mounted) return;
@@ -117,7 +109,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
     setState(() => carregando = false);
   }
 
-  // Método para limpar os campos
   void _limparCampos() {
     nomeController.clear();
     localizacaoController.clear();
@@ -151,7 +142,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
           if (isEditing)
             TextButton(
               onPressed: () {
-                // Resetar para valores originais
                 if (widget.character != null) {
                   _preencherCampos();
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -182,7 +172,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
               key: _formKey,
               child: Column(
                 children: [
-                  // Ícone
                   Icon(
                     isEditing
                         ? Icons.edit_note_outlined
@@ -193,7 +182,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
 
                   const SizedBox(height: 10),
 
-                  // Título
                   Text(
                     isEditing ? "Editando Personagem" : "Personagem Perdido",
                     style: const TextStyle(
@@ -202,7 +190,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
                     ),
                   ),
 
-                  // ID do personagem (se estiver editando)
                   if (isEditing) ...[
                     const SizedBox(height: 8),
                     Container(
@@ -228,7 +215,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
 
                   const SizedBox(height: 30),
 
-                  // Campo Nome
                   TextFormField(
                     controller: nomeController,
                     decoration: const InputDecoration(
@@ -253,7 +239,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
 
                   const SizedBox(height: 20),
 
-                  // Dropdown Série
                   DropdownButtonFormField<String>(
                     value: serie,
                     decoration: const InputDecoration(
@@ -282,7 +267,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
 
                   const SizedBox(height: 20),
 
-                  // Campo Localização
                   TextFormField(
                     controller: localizacaoController,
                     decoration: const InputDecoration(
@@ -304,7 +288,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
 
                   const SizedBox(height: 25),
 
-                  // Slider Carisma
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -361,7 +344,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
 
                   const SizedBox(height: 20),
 
-                  // Campo Observações
                   TextFormField(
                     controller: observacoesController,
                     maxLines: 4,
@@ -379,10 +361,8 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
 
                   const SizedBox(height: 35),
 
-                  // Botões de ação
                   Row(
                     children: [
-                      // Botão Cancelar
                       Expanded(
                         flex: 1,
                         child: OutlinedButton.icon(
@@ -400,7 +380,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      // Botão Salvar/Cadastrar
                       Expanded(
                         flex: 2,
                         child: ElevatedButton.icon(
@@ -440,7 +419,6 @@ class _CadastroPersonagemPageState extends State<CadastroPersonagemPage> {
                     ],
                   ),
 
-                  // Informação extra para edição
                   if (isEditing) ...[
                     const SizedBox(height: 16),
                     Container(
